@@ -1,0 +1,10 @@
+devDB*
+ssh/
+.svn
+*.log
+*.swp
+.DS_Store
+*.tips
+advices/*
+Session.vim
+conf/

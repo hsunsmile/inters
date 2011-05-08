@@ -1,0 +1,13 @@
+<plugin name='xfire' version='0.7.5'>
+  <author>Chanwit Kaewkasi</author>
+  <authorEmail>chanwit@gmail.com</authorEmail>
+  <title>Add Web Service support for Grails services using XFire.</title>
+  <description>XFire plugin allows Grails applications to expose service 
+classes as Web Services. It uses the SOAP implementation 
+from XFire 1.2.6.
+</description>
+  <documentation>http://grails.org/Xfire+plugin</documentation>
+  <resources>
+    <resource>UrlMappings</resource>
+  </resources>
+</plugin>

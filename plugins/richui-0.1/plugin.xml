@@ -1,0 +1,27 @@
+<plugin name='richui' version='0.1'>
+  <author>Andreas Schmitt</author>
+  <authorEmail>andreas.schmitt.mi@gmail.com</authorEmail>
+  <title>Provides a set of AJAX components</title>
+  <description>
+Provides a set of AJAX components
+</description>
+  <documentation>http://grails.org/RichUI+Plugin</documentation>
+  <resources>
+    <resource>FontImageController</resource>
+    <resource>FontImageService</resource>
+    <resource>RichUIUtilTagLib</resource>
+    <resource>DateChooserTagLib</resource>
+    <resource>TabViewTagLib</resource>
+    <resource>UserInterfaceTagLib</resource>
+    <resource>ResourceTagLib</resource>
+    <resource>TooltipTagLib</resource>
+    <resource>GoogleMapsTagLib</resource>
+    <resource>TimelineTagLib</resource>
+    <resource>TreeViewTagLib</resource>
+    <resource>AutoCompleteTagLib</resource>
+    <resource>TagCloudTagLib</resource>
+    <resource>RatingTagLib</resource>
+    <resource>ProgressBarTagLib</resource>
+    <resource>FontTagLib</resource>
+  </resources>
+</plugin>

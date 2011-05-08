@@ -1,0 +1,30 @@
+
+class %USER_AGENT%Submitter {
+
+	def _scheduler;
+	def _client;
+
+	def %USER_AGENT%Submitter(SchedulerCoreService scheduler, Client client ) {
+		_scheduler = scheduler;
+		_client = client;
+	}
+
+	def submit() {
+		def _advisor = new Advisor( name: %SCHEDULING_ADVISOR% ).save(flush:true);
+		def _func = new RemoteFunction( name:'%MODULE_NAME%', advisor:_advisor ).save();
+		def submitThread = new Thread() {
+			try {
+				def jobId;
+				jobId = _scheduler?.addJob( _client, _func, %ARGS%, %OUTPUT% );
+				def jobThread = new Thread() {
+					_scheduler?.waitJob(jobId);
+					println " [RES] ${jobId} *${new Date()}* $result ";
+				}
+				jobThread.start();
+			} catch ( Exception e ) { e.printStackTrace() }
+			_scheduler?.shutdown();
+		}
+		submitThread.start();
+	}
+
+}

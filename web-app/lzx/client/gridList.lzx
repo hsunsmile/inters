@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<canvas debug="false" bgcolor='#D4D0C8' proxied="false">
+
+<script>
+	flash.external.ExternalInterface.addCallback("searchKeyword",null,searchKeyword);
+	function searchKeyword(o,m) {
+		canvas.search(o,m);
+	}
+</script>
+
+	<method name="search" args="o,m">
+	 <![CDATA[
+			Debug.write("searched! with "+o+" and "+m);
+			canvas.dset.setQueryType("POST");
+			canvas.dset.setSrc("/scheduler/client/listAsXML?offset="+o+"&max="+m);
+			canvas.dset.doRequest();
+   ]]>
+	</method>
+
+  <dataset name='dset' type='http' src='/scheduler/client/listAsXML'/>
+	<script>
+	 <![CDATA[
+		Debug.write("On init for datasets");
+		canvas.search(offset,max);
+   ]]>
+	</script>
+	<view layout="axis:y; spacing:10">
+		<view x="10">
+      <grid id="gd" datapath="dset:/rowset" contentdatapath="row" height="265">
+				<gridtext editable="false" datapath="@no" resizable="false" sortable="false" width="25" text="No" textalign="center"/>
+						
+                   <gridcolumn width='100'>configFilePath  <text datapath='configFilePath/text()'>  </text></gridcolumn>
+                
+                   <gridcolumn width='100'>submitterName  <text datapath='submitterName/text()'>  </text></gridcolumn>
+                
+                   <gridcolumn width='100'>userName  <text datapath='userName/text()'>  </text></gridcolumn>
+                
+              <gridcolumn>link
+					<view datapath="position()">
+						<method event="onclick">
+							Debug.write("onclick");
+							i = this.datapath.xpathQuery("id/text()");
+							Debug.write("id: "+i);
+							LzBrowser.loadURL("show/"+i, '_self');
+						</method>
+						<text align="center">
+							<font color="#0000FF"><u>show</u></font>
+						</text>
+					</view>
+				</gridcolumn>
+			</grid>
+		</view>
+	</view>
+</canvas>

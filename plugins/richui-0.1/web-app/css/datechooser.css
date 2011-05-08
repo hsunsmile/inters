@@ -1,0 +1,2 @@
+div.calendar { display:none; position:absolute; left:10px; top:10px; z-index:2}
+table.yui-calendar { width: 200px;}

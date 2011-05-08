@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+		<bean id="groovyService" abstract="true" init-method="initialize" destroy-method="destroy">
+				<property name="bindings">
+						<map>
+								<entry key="info" value-ref="advisorInfoService" />
+								<entry key="scheduler" value-ref="schedulerCoreService" />
+								<entry key="app" value-ref="grailsApplication" />
+						</map>
+				</property>
+		</bean>
+		<bean id="groovyShellService" class="com.iterative.groovy.service.GroovyShellService" parent="groovyService">
+				<property name="socket" value="6789" />
+				<property name="launchAtStart" value="true" />
+		</bean>
+		<bean id="groovyConsoleService" class="com.iterative.groovy.service.GroovyConsoleService" parent="groovyService" />
+</beans>

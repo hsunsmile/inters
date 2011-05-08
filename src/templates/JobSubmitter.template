@@ -1,0 +1,43 @@
+
+class SUBMITTER_NAME {
+
+	def _scheduler
+	def _client
+
+	def SUBMITTER_NAME(SchedulerCoreService scheduler, Client client ) {
+		_scheduler = scheduler
+		_client = client 
+	}
+
+	def submit() {
+
+		def submitThread = new Thread() {
+
+			def filenamebase = "/home/xsun/working/testPro/useCG/cgTestFile/data"
+			def classTypeList = [ 3 ]
+			1.upto(JOBS_NUM) { seq ->
+				try {
+					def result = new String[1]
+						def jobId
+						def classType = classTypeList.remove(0) 
+						if( seq % 2 == 0 ) {
+							def filename = filenamebase + [ 's','w','a','b' ].get( classType-1 )
+								jobId = _scheduler?.addTestJob(_client, 
+										'useNetCG/cg_main', filename, classType, seq, result)
+						} else {
+							jobId = _scheduler?.addTestJob(_client, 'useCPUEP/ep_main', classType, seq, result)
+						}
+						classTypeList << classType
+						def jobThread = new Thread() {
+							_scheduler?.waitJob(jobId)
+								println " [RES] ${jobId} *${new Date()}* $result "
+						}
+					jobThread.start()
+				}catch ( Exception e ) { println "+++"; e.printStackTrace() }
+			}
+			_scheduler?.shutdown()
+		}
+		submitThread.start()
+	}
+
+}

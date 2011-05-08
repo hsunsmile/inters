@@ -1,0 +1,22 @@
+# This is configuration file for sample program PI on one server.
+
+<CLIENT>
+	loglevel_ninfgProtocol 2
+	loglevel_ninfgInternal 2
+	loglevel_ninfgGrpc 2
+</CLIENT>
+
+<% for(server in serverList) { %>
+<SERVER>
+	 hostname ${server.name}
+<% if( server.jobmanager ) {
+	print "\t jobmanager jobmanager-${server.jobmanager}"
+} %>
+</SERVER>
+<% } %>
+
+<LOCAL_LDIF>
+<% for( file in fileList ) {
+	println "\t filename ${file}"
+} %>
+</LOCAL_LDIF>
